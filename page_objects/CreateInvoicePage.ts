@@ -75,7 +75,7 @@ export class CreateInvoicePage {
     await this.quantityInput.fill(String(quantity))
   }
 
-  async addAttachment(path: string) {
+  async addAttachment() {
     await this.addAttachmentButton.click()
   }
 }
