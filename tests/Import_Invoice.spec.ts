@@ -30,7 +30,7 @@ test('Import Invoice', async ({
   })
 
   await test.step('4. Přidat příloha', async () => {
-    await createInvoicePage.addAttachment('')
+    await createInvoicePage.addAttachment()
     console.log('Nahraj fakturu')
   })
 })
