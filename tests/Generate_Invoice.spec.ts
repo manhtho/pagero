@@ -1,8 +1,17 @@
 import { test } from '../fixtures/BasePage'
 import * as path from 'node:path'
+import * as invoice from '../pdf/Invoice'
+import { renderInvoice } from '../pdf/Invoice'
 
 test('Generate Invoice', async ({ page }) => {
-  await page.goto('http://localhost:3000/invoice')
+  renderInvoice(invoice.invoice)
+  const filePath = path.resolve(
+    __dirname,
+    '..',
+    'pdf',
+    'generated-invoice.html',
+  )
+  await page.goto(`file://${filePath}`)
   await new Promise((r) => setTimeout(r, 5000))
 
   const pdfPath = path.join('./test-results', 'invoice.pdf')
@@ -11,5 +20,4 @@ test('Generate Invoice', async ({ page }) => {
     format: 'A4',
     printBackground: true,
   })
-  console.log('PDF saved to:', pdfPath)
 })
