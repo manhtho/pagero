@@ -1,7 +1,5 @@
 import { defineConfig, devices } from '@playwright/test'
 
-const isWebServer = process.env.WEB_SERVER === 'true'
-
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -20,12 +18,4 @@ export default defineConfig({
       use: { ...devices['Chrome'] },
     },
   ],
-  webServer: isWebServer
-    ? {
-        command: 'npx serve ./site -p 3000',
-        port: 3000,
-        timeout: 120 * 1000,
-        reuseExistingServer: !process.env.CI,
-      }
-    : undefined,
 })

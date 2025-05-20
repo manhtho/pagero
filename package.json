@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "import": "playwright test Import",
-    "generate": "WEB_SERVER=true playwright test Generate"
+    "generate": "playwright test Generate"
   },
   "keywords": [],
   "author": "Tony",
@@ -12,11 +12,11 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.52.0",
-    "@types/node": "^22.15.17",
-    "serve": "^14.2.4"
+    "@types/node": "^22.15.17"
   },
   "dependencies": {
     "date-fns": "^4.1.0",
+    "handlebars": "^4.7.8",
     "prettier": "^3.5.3"
   }
 }

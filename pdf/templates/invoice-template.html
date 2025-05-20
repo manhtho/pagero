@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Faktura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            padding: 40px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: right;
+            margin-bottom: 30px;
+        }
+
+        .info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .description {
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 10px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            text-align: right;
+        }
+
+        td {
+            text-align: right;
+        }
+
+        td.left, th.left {
+            text-align: left;
+        }
+
+        .totals {
+            margin-top: 30px;
+            float: right;
+            text-align: right;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .currency {
+            white-space: nowrap;
+        }
+
+        .totals {
+            margin-top: 30px;
+            width: 300px;
+            float: right;
+            border-collapse: collapse;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .totals td {
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            text-align: right;
+        }
+
+        .totals td.label {
+            text-align: left;
+            background-color: #f9f9f9;
+            font-weight: normal;
+        }
+
+        .totals .grand-total td {
+            font-weight: bold;
+            background-color: #eef2f7;
+        }
+    </style>
+
+</head>
+<body>
+<h1>FAKTURA</h1>
+
+<div class="info">
+    <div>
+        <strong>Dodavatel</strong><br>
+        {{supplier.name}}<br>
+        {{supplier.address}}<br>
+        IČ: {{supplier.companyId}}<br>
+        DIČ: {{supplier.taxId}}<br>
+        Číslo dodavatele: {{supplier.companyNumber}}
+    </div>
+    <div>
+        <strong>Odběratel</strong><br>
+        {{customer.name}}<br>
+        {{customer.address}}<br>
+        IČ: {{customer.companyId}}<br>
+        DIČ: {{customer.taxId}}<br>
+    </div>
+</div>
+
+<div>
+    <strong>Číslo faktury:</strong> {{invoiceNumber}}<br>
+    <strong>Objednávka:</strong> {{orderNumber}}<br>
+    <strong>Datum vystavení:</strong> {{dates.issueDate}}<br>
+    <strong>Datum splatnosti:</strong> {{dates.dueDate}}<br>
+    <strong>Datum zdanitelného plnění:</strong> {{dates.taxableSupplyDate}}<br>
+    <strong>Způsob platby:</strong> {{payment.method}}<br>
+    <strong>Číslo účtu:</strong> {{payment.accountNumber}}<br>
+    <strong>Variabilní symbol:</strong> {{payment.variableSymbol}}<br>
+</div>
+
+<p class="description">{{description}}</p>
+
+<table>
+    <thead>
+    <tr>
+        <th class="left">Služba</th>
+        <th>Hodin</th>
+        <th>MD</th>
+        <th>Sazba/den</th>
+        <th>Základ DPH</th>
+        <th>DPH {{total.vatRate}}%</th>
+        <th>Celkem s DPH</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each items}}
+    <tr>
+        <td class="left">{{service}}</td>
+        <td>{{hours}}</td>
+        <td>{{manDays}}</td>
+        <td class="currency">{{ratePerManDay}} Kč</td>
+        <td class="currency">{{taxBase}} Kč</td>
+        <td class="currency">{{vatAmount}} Kč</td>
+        <td class="currency">{{totalWithVAT}} Kč</td>
+    </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+
+<table class="totals">
+    <tbody>
+    <tr>
+        <td class="label">Základ DPH</td>
+        <td class="currency">{{total.taxBase}} Kč</td>
+    </tr>
+    <tr>
+        <td class="label">DPH ({{total.vatRate}}%)</td>
+        <td class="currency">{{total.vatAmount}} Kč</td>
+    </tr>
+    <tr class="grand-total">
+        <td class="label">Celkem s DPH</td>
+        <td class="currency">{{total.totalWithVAT}} Kč</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

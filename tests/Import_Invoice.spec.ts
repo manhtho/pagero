@@ -3,6 +3,7 @@ import { config } from '../import.config'
 import { getInvoice } from '../types/Invoice'
 
 test('Import Invoice', async ({
+  page,
   loginPage,
   headerBar,
   leftSideBar,
@@ -31,6 +32,6 @@ test('Import Invoice', async ({
 
   await test.step('4. Přidat příloha', async () => {
     await createInvoicePage.addAttachment()
-    console.log('Nahraj fakturu')
+    await page.pause()
   })
 })
