@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs">
 <head>
     <meta charset="UTF-8"/>
     <title>Faktura</title>
@@ -12,7 +12,7 @@
         }
 
         h1 {
-            text-align: right;
+            text-align: left;
             margin-bottom: 30px;
         }
 
@@ -52,21 +52,13 @@
             text-align: left;
         }
 
-        .totals {
-            margin-top: 30px;
-            float: right;
-            text-align: right;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
         .currency {
             white-space: nowrap;
         }
 
         .totals {
-            margin-top: 30px;
-            width: 300px;
+            font-size: 14px;
+            max-width: 300px;
             float: right;
             border-collapse: collapse;
             font-variant-numeric: tabular-nums;
@@ -92,7 +84,7 @@
 
 </head>
 <body>
-<h1>FAKTURA</h1>
+<h1>FAKTURA {{invoiceNumber}}</h1>
 
 <div class="info">
     <div>
